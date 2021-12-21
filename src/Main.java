@@ -13,7 +13,7 @@ public class Main {
         System.out.println("2. Alterar Aluno/Pessoa");
         System.out.println("3. Excluir Aluno/Pessoa");
         System.out.println("4. Consultar todos Aluno/Pessoa");
-        System.out.print("Opcao: ");
+        System.out.print("Opção: ");
     }
 
     public static void main(String[] args) {
@@ -26,45 +26,97 @@ public class Main {
 
             switch(opcao){
                 case 1:
-                    incluir();
+                    System.out.println("Opção 'Incluir' selecionada.");
+                    Scanner entradaIncluir = new Scanner(System.in);
+
+                    System.out.print("Digite o nome: ");
+                    String nome = entradaIncluir.nextLine();
+                    if(nome.equals("")){
+                        System.out.println("Nome não pode ser vazio.");
+                        break;
+                    }
+
+                    System.out.print("Digite a data de nascimento (DDMMAAAA): ");
+                    String dataNascimento = entradaIncluir.nextLine();
+                    if(dataNascimento.equals("")){
+                        System.out.println("Data de nascimento não pode ser vazio.");
+                        break;
+                    }
+
+                    System.out.print("Digite o telefone (somente números e com ddd): ");
+                    String telefone = entradaIncluir.nextLine();
+                    if(telefone.equals("")){
+                        System.out.println("Telefone de nascimento não pode ser vazio.");
+                        break;
+                    }
+
+                    System.out.print("Digite a nota (-1 para não aluno): ");
+                    double nota = entradaIncluir.nextDouble();
+                    if(nota == -1 || nota >= 0) {
+                        incluir(nome, dataNascimento, telefone, nota);
+                    } else {
+                        System.out.println("Nota digitida inváilda.");
+                        break;
+                    }
                     break;
 
                 case 2:
-                    alterar();
+                    if(!lista.isEmpty()) {
+                        System.out.println("Opção 'Alterar' selecionada.");
+                        System.out.print("Digite o nome para buscar: ");
+                        Scanner entradaAlterar = new Scanner(System.in);
+                        String buscarNome = entradaAlterar.nextLine();
+                        if(lista.stream().allMatch(pessoa -> pessoa.getNome().equalsIgnoreCase(buscarNome))) {
+                            alterar(buscarNome);
+                        } else {
+                            System.out.println("Cadastro não localizado.");
+                        }
+                    } else {
+                        System.out.println("Não há cadastros registrados.");
+                    }
                     break;
 
                 case 3:
-                    excluir();
-                    break;
+                    if(!lista.isEmpty()) {
+                        System.out.println("Opção 'Excluir' selecionada.");
+                        Scanner entradaExcluir = new Scanner(System.in);
+                        System.out.print("Digite o nome do cadastro que deseja excluir: ");
+                        String nomeExclusao = entradaExcluir.nextLine();
+                        if(lista.stream().allMatch(pessoa -> pessoa.getNome().equalsIgnoreCase(nomeExclusao))) {
+                            excluir(nomeExclusao);
+                            break;
+                        } else {
+                            System.out.println("Cadastro não localizado.");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Não há cadastros registrados.");
+                        break;
+                    }
 
                 case 4:
-                    mostrarTodos();
+                    if(!lista.isEmpty()) {
+                        System.out.println("Opção 'Mostrar Todos' selecionada.");
+                        mostrarTodos();
+                    } else {
+                        System.out.println("Não há cadastros registrados.");
+                    }
                     break;
 
-                default:
+                case 0:
                     System.out.println("Fim da aplicação.");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Opção inválida.");
             }
-        } while(opcao != 0);
+        } while(true);
     }
 
-    private static void incluir() {
+    private static void incluir(String nome, String dataNascimento, String telefone, double nota) {
         Date dataCriacaoCadastro = new Date();
         Date dataAlteracaoCadastro = new Date();
 
-        System.out.println("Opção 'Incluir' selecionada.");
-        Scanner entrada = new Scanner(System.in);
-
-        System.out.print("Digite o nome: ");
-        String nome = entrada.nextLine();
-
-        System.out.print("Digite a data de nascimento (dd/mm/aaaa): ");
-        String dataNascimento = entrada.nextLine();
-
-        System.out.print("Digite o telefone (somente numeros): ");
-        Integer telefone = entrada.nextInt();
-
-        System.out.print("Digite a nota (-1 para não aluno): ");
-        double nota = entrada.nextDouble();
         if(nota == -1){
             Pessoa pessoa = new Pessoa(nome, telefone, dataNascimento, dataCriacaoCadastro, dataAlteracaoCadastro);
             lista.add(pessoa);
@@ -74,20 +126,77 @@ public class Main {
         }
     }
 
-    private static void alterar() {
-        System.out.println("Opção 'Alterar' selecionada.");
+    private static void alterar(String nome) {
+        Scanner entrada = new Scanner(System.in);
+
+        for (Pessoa p: lista) {
+
+            if(p.getNome().equals(nome)){
+
+                String nomeAtual = p.getNome();
+                String telefoneAtual = p.getTelefone();
+                String nascimentoAtual = p .getDataNascimento();
+
+                Date novaDataAlteracaoCadastro = new Date();
+
+                System.out.print("Digite o novo nome (deixe em branco para não alterar): ");
+                String novoNome = entrada.nextLine();
+                if (!novoNome.equals("")) {
+                    p.setNome(novoNome);
+                } else {
+                    p.setNome(nomeAtual);
+                }
+
+                System.out.print("Digite a nova data de nascimento (DDMMAAAA) (deixe em branco para não alterar): ");
+                String novaDataNascimento = entrada.nextLine();
+                if (!novaDataNascimento.equals("")){
+                    p.setDataNascimento(novaDataNascimento);
+                } else {
+                    p.setDataNascimento(nascimentoAtual);
+                }
+
+                System.out.print("Digite o novo telefone (somente números) (deixe em branco para não alterar): ");
+                String novoTelefone = entrada.nextLine();
+                if(!novoTelefone.equals("")) {
+                    p.setTelefone(novoTelefone);
+                } else {
+                    p.setTelefone(telefoneAtual);
+                }
+
+                if(p instanceof Aluno){
+                    System.out.print("Digite a nova nota: ");
+                    double novaNota = entrada.nextDouble();
+                    if(novaNota >= 0) {
+                        ((Aluno) p).setNotaFinal(novaNota);
+                    } else {
+                        System.out.println("Nota deve ser maior ou igual à zero.");
+                    }
+                }
+
+                p.setUltimaAlteracao(novaDataAlteracaoCadastro);
+                break;
+
+            }
+
+        }
+
     }
 
-    private static void excluir() {
-        System.out.println("Opção 'Excluir' selecionada.");
+
+    private static void excluir(String nome) {
+
+        if (lista.removeIf(pessoa -> pessoa.getNome().equals(nome))) {
+            System.out.println("Cadastro excluído.");
+        } else {
+            System.out.println("Cadastro não encontrado.");
+        }
+
     }
 
     private static void mostrarTodos() {
-        System.out.println("Opção 'Mostrar Todos' selecionada.");
         for (Pessoa pessoa : lista) {
             System.out.println("Dados do cadastro: " + pessoa.toString());
         }
     }
-
 
 }

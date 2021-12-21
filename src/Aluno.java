@@ -4,7 +4,7 @@ public class Aluno extends Pessoa{
 
     private double notaFinal;
 
-    public Aluno(String nome, Integer telefone, String dataNascimento, Date dataCadastro, Date ultimaAlteracao, double notaFinal) {
+    public Aluno(String nome, String telefone, String dataNascimento, Date dataCadastro, Date ultimaAlteracao, double notaFinal) {
         super(nome, telefone, dataNascimento, dataCadastro, ultimaAlteracao);
         this.notaFinal = notaFinal;
     }
