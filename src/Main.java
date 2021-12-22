@@ -31,33 +31,55 @@ public class Main {
 
                     System.out.print("Digite o nome: ");
                     String nome = entradaIncluir.nextLine();
-                    if(nome.equals("")){
+                    //if(nome.equals("")){
+                    //    System.out.println("Nome não pode ser vazio.");
+                    //    break;
+                    //}
+                    while(nome.equals("")){
                         System.out.println("Nome não pode ser vazio.");
-                        break;
+                        System.out.print("Digite o nome: ");
+                        nome = entradaIncluir.nextLine();
                     }
 
                     System.out.print("Digite a data de nascimento (DDMMAAAA): ");
                     String dataNascimento = entradaIncluir.nextLine();
-                    if(dataNascimento.equals("")){
+                    //if(dataNascimento.equals("")){
+                    //    System.out.println("Data de nascimento não pode ser vazio.");
+                    //    break;
+                    //}
+                    while(dataNascimento.equals("")){
                         System.out.println("Data de nascimento não pode ser vazio.");
-                        break;
+                        System.out.print("Digite a data de nascimento (DDMMAAAA): ");
+                        dataNascimento = entradaIncluir.nextLine();
                     }
 
                     System.out.print("Digite o telefone (somente números e com ddd): ");
                     String telefone = entradaIncluir.nextLine();
-                    if(telefone.equals("")){
+                    //if(telefone.equals("")){
+                    //    System.out.println("Telefone de nascimento não pode ser vazio.");
+                    //    break;
+                    //}
+                    while(telefone.equals("")){
                         System.out.println("Telefone de nascimento não pode ser vazio.");
-                        break;
+                        System.out.print("Digite o telefone (somente números e com ddd): ");
+                        telefone = entradaIncluir.nextLine();
                     }
 
                     System.out.print("Digite a nota (-1 para não aluno): ");
                     double nota = entradaIncluir.nextDouble();
-                    if(nota == -1 || nota >= 0) {
-                        incluir(nome, dataNascimento, telefone, nota);
-                    } else {
-                        System.out.println("Nota digitida inváilda.");
-                        break;
+                    //if(nota == -1 || nota >= 0) {
+                    //    incluir(nome, dataNascimento, telefone, nota);
+                    //} else {
+                    //    System.out.println("Nota digitida inválida.");
+                    //    break;
+                    //}
+
+                    while(nota < -1){
+                        System.out.println("Nota digitida inválida.");
+                        System.out.print("Digite a nota (-1 para não aluno): ");
+                        nota = entradaIncluir.nextDouble();
                     }
+                    incluir(nome, dataNascimento, telefone, nota);
                     break;
 
                 case 2:
@@ -164,12 +186,14 @@ public class Main {
                 }
 
                 if(p instanceof Aluno){
-                    System.out.print("Digite a nova nota: ");
+                    System.out.print("Digite a nova nota (digite -1 para não alterar): ");
                     double novaNota = entrada.nextDouble();
                     if(novaNota >= 0) {
                         ((Aluno) p).setNotaFinal(novaNota);
+                    } else if (novaNota == -1){
+                        ((Aluno) p).setNotaFinal(((Aluno) p).getNotaFinal());
                     } else {
-                        System.out.println("Nota deve ser maior ou igual à zero.");
+                        System.out.println("Nota inválida.");
                     }
                 }
 
