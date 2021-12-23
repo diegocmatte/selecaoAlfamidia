@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Pessoa {
 
+    private static int count = 0;
+    private int idPessoa;
     private String nome;
     private String telefone;
     private String dataNascimento;
@@ -17,6 +19,11 @@ public class Pessoa {
         this.dataNascimento = dataNascimento;
         this.dataCadastro = dataCadastro;
         this.ultimaAlteracao = ultimaAlteracao;
+        this.idPessoa = count++;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
     public String getNome() {
@@ -62,11 +69,12 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                " Nome = " + nome +
-                ", telefone = " + formatarString(telefone, "(##) ####-####") +
-                ", data de nascimento = " + formatarString(dataNascimento, "##/##/####")  +
-                ", data de cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataCadastro) +
-                ", última alteração no cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(ultimaAlteracao) +
+                " ID = " + idPessoa +
+                ", Nome = " + nome +
+                ", Telefone = " + formatarString(telefone, "(##) ####-####") +
+                ", Data de nascimento = " + formatarString(dataNascimento, "##/##/####")  +
+                ", Data de cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataCadastro) +
+                ", Última alteração no cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(ultimaAlteracao) +
                 '}';
     }
 

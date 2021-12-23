@@ -20,7 +20,8 @@ public class Aluno extends Pessoa{
     @Override
     public String toString() {
         return "Aluno{" +
-                " Nome = " + super.getNome() +
+                " ID = " + super.getIdPessoa() +
+                ", Nome = " + super.getNome() +
                 ", telefone = " + super.getTelefone() +
                 ", data de nascimento = " + super.getDataNascimento() +
                 ", data de cadastro = " + super.getDataCadastro() +

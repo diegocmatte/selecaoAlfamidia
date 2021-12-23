@@ -13,7 +13,7 @@ public class Main {
         System.out.println("2. Alterar Aluno/Pessoa");
         System.out.println("3. Excluir Aluno/Pessoa");
         System.out.println("4. Consultar todos Aluno/Pessoa");
-        System.out.print("Opção: ");
+        System.out.print("Digite a opção desejada: ");
     }
 
     public static void main(String[] args) {
@@ -31,10 +31,6 @@ public class Main {
 
                     System.out.print("Digite o nome: ");
                     String nome = entradaIncluir.nextLine();
-                    //if(nome.equals("")){
-                    //    System.out.println("Nome não pode ser vazio.");
-                    //    break;
-                    //}
                     while(nome.equals("")){
                         System.out.println("Nome não pode ser vazio.");
                         System.out.print("Digite o nome: ");
@@ -43,37 +39,23 @@ public class Main {
 
                     System.out.print("Digite a data de nascimento (DDMMAAAA): ");
                     String dataNascimento = entradaIncluir.nextLine();
-                    //if(dataNascimento.equals("")){
-                    //    System.out.println("Data de nascimento não pode ser vazio.");
-                    //    break;
-                    //}
-                    while(dataNascimento.equals("")){
-                        System.out.println("Data de nascimento não pode ser vazio.");
+                    while(dataNascimento.length() != 8){
+                        System.out.println("Data de nascimento não pode ser menor/maior que 8 dígitos.");
                         System.out.print("Digite a data de nascimento (DDMMAAAA): ");
                         dataNascimento = entradaIncluir.nextLine();
+
                     }
 
                     System.out.print("Digite o telefone (somente números e com ddd): ");
                     String telefone = entradaIncluir.nextLine();
-                    //if(telefone.equals("")){
-                    //    System.out.println("Telefone de nascimento não pode ser vazio.");
-                    //    break;
-                    //}
-                    while(telefone.equals("")){
-                        System.out.println("Telefone de nascimento não pode ser vazio.");
+                    while(telefone.length() != 11){
+                        System.out.println("Telefone de nascimento não pode ser menor/maior que 11 dígitos.");
                         System.out.print("Digite o telefone (somente números e com ddd): ");
                         telefone = entradaIncluir.nextLine();
                     }
 
                     System.out.print("Digite a nota (-1 para não aluno): ");
                     double nota = entradaIncluir.nextDouble();
-                    //if(nota == -1 || nota >= 0) {
-                    //    incluir(nome, dataNascimento, telefone, nota);
-                    //} else {
-                    //    System.out.println("Nota digitida inválida.");
-                    //    break;
-                    //}
-
                     while(nota < -1){
                         System.out.println("Nota digitida inválida.");
                         System.out.print("Digite a nota (-1 para não aluno): ");
@@ -106,15 +88,13 @@ public class Main {
                         String nomeExclusao = entradaExcluir.nextLine();
                         if(lista.stream().allMatch(pessoa -> pessoa.getNome().equalsIgnoreCase(nomeExclusao))) {
                             excluir(nomeExclusao);
-                            break;
                         } else {
                             System.out.println("Cadastro não localizado.");
-                            break;
                         }
                     } else {
                         System.out.println("Não há cadastros registrados.");
-                        break;
                     }
+                    break;
 
                 case 4:
                     if(!lista.isEmpty()) {
@@ -165,24 +145,30 @@ public class Main {
                 String novoNome = entrada.nextLine();
                 if (!novoNome.equals("")) {
                     p.setNome(novoNome);
+                    System.out.println("Nome alterado com sucesso.");
                 } else {
                     p.setNome(nomeAtual);
+                    System.out.println("Nome não foi alterado.");
                 }
 
                 System.out.print("Digite a nova data de nascimento (DDMMAAAA) (deixe em branco para não alterar): ");
                 String novaDataNascimento = entrada.nextLine();
-                if (!novaDataNascimento.equals("")){
+                if (novaDataNascimento.length() == 8){
                     p.setDataNascimento(novaDataNascimento);
+                    System.out.println("Data de nascimento alterada com sucesso.");
                 } else {
                     p.setDataNascimento(nascimentoAtual);
+                    System.out.println("Data de nascimento não foi alterada.");
                 }
 
-                System.out.print("Digite o novo telefone (somente números) (deixe em branco para não alterar): ");
+                System.out.print("Digite o novo telefone (somente números e DDD) (deixe em branco para não alterar): ");
                 String novoTelefone = entrada.nextLine();
-                if(!novoTelefone.equals("")) {
+                if(novoTelefone.length() == 11) {
                     p.setTelefone(novoTelefone);
+                    System.out.println("Telefone alterado com sucesso");
                 } else {
                     p.setTelefone(telefoneAtual);
+                    System.out.println("Telefone não foi alterado.");
                 }
 
                 if(p instanceof Aluno){
@@ -190,8 +176,10 @@ public class Main {
                     double novaNota = entrada.nextDouble();
                     if(novaNota >= 0) {
                         ((Aluno) p).setNotaFinal(novaNota);
+                        System.out.println("Nota final alterada com sucesso.");
                     } else if (novaNota == -1){
                         ((Aluno) p).setNotaFinal(((Aluno) p).getNotaFinal());
+                        System.out.println("Nota final não foi alterada.");
                     } else {
                         System.out.println("Nota inválida.");
                     }
@@ -205,8 +193,6 @@ public class Main {
         }
 
     }
-
-
     private static void excluir(String nome) {
 
         if (lista.removeIf(pessoa -> pessoa.getNome().equals(nome))) {
