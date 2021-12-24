@@ -27,7 +27,7 @@ public class Aluno extends Pessoa{
                 ", data de cadastro = " + super.getDataCadastro() +
                 ", última alteração no cadastro = " + super.getUltimaAlteracao() +
                 ", nota final = " + notaFinal +
-                '}';
+                " }";
 
     }
 }

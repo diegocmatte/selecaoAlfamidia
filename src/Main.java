@@ -67,11 +67,12 @@ public class Main {
                 case 2:
                     if(!lista.isEmpty()) {
                         System.out.println("Opção 'Alterar' selecionada.");
-                        System.out.print("Digite o nome para buscar: ");
+                        mostrarNomeId();
+                        System.out.print("Digite o ID para selecionar: ");
                         Scanner entradaAlterar = new Scanner(System.in);
-                        String buscarNome = entradaAlterar.nextLine();
-                        if(lista.stream().allMatch(pessoa -> pessoa.getNome().equalsIgnoreCase(buscarNome))) {
-                            alterar(buscarNome);
+                        Integer idPessoa = entradaAlterar.nextInt();
+                        if(lista.stream().allMatch(pessoa -> pessoa.getIdPessoa() == idPessoa)) {
+                            alterar(idPessoa);
                         } else {
                             System.out.println("Cadastro não localizado.");
                         }
@@ -83,11 +84,12 @@ public class Main {
                 case 3:
                     if(!lista.isEmpty()) {
                         System.out.println("Opção 'Excluir' selecionada.");
+                        mostrarNomeId();
                         Scanner entradaExcluir = new Scanner(System.in);
-                        System.out.print("Digite o nome do cadastro que deseja excluir: ");
-                        String nomeExclusao = entradaExcluir.nextLine();
-                        if(lista.stream().allMatch(pessoa -> pessoa.getNome().equalsIgnoreCase(nomeExclusao))) {
-                            excluir(nomeExclusao);
+                        System.out.print("Digite o ID para excluir: ");
+                        Integer idPessoa = entradaExcluir.nextInt();
+                        if(lista.stream().allMatch(pessoa -> pessoa.getIdPessoa() == idPessoa)) {
+                            excluir(idPessoa);
                         } else {
                             System.out.println("Cadastro não localizado.");
                         }
@@ -128,12 +130,12 @@ public class Main {
         }
     }
 
-    public static void alterar(String nome) {
+    public static void alterar(Integer idPessoa) {
         Scanner entrada = new Scanner(System.in);
 
         for (Pessoa p: lista) {
 
-            if(p.getNome().equals(nome)){
+            if(p.getIdPessoa() == idPessoa){
 
                 String nomeAtual = p.getNome();
                 String telefoneAtual = p.getTelefone();
@@ -193,9 +195,9 @@ public class Main {
         }
 
     }
-    public static void excluir(String nome) {
+    public static void excluir(Integer idPessoa) {
 
-        if (lista.removeIf(pessoa -> pessoa.getNome().equals(nome))) {
+        if (lista.removeIf(pessoa -> pessoa.getIdPessoa() == idPessoa)) {
             System.out.println("Cadastro excluído.");
         } else {
             System.out.println("Cadastro não encontrado.");
@@ -206,6 +208,14 @@ public class Main {
     public static void mostrarTodos() {
         for (Pessoa pessoa : lista) {
             System.out.println("Dados do cadastro: " + pessoa.toString());
+        }
+    }
+
+    private static void mostrarNomeId(){
+        System.out.println("Nome e ID das Pessoas/Alunos registrados.");
+        for (Pessoa value : lista) {
+            System.out.println("{ Nome: " + value.getNome() +
+                    ", ID: " + value.getIdPessoa() + "}");
         }
     }
 

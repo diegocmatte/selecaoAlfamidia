@@ -75,7 +75,7 @@ public class Pessoa {
                 ", Data de nascimento = " + formatarString(dataNascimento, "##/##/####")  +
                 ", Data de cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataCadastro) +
                 ", Última alteração no cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(ultimaAlteracao) +
-                '}';
+                " }";
     }
 
     private String formatarString(String value, String pattern) {
