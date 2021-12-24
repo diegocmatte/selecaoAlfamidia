@@ -115,7 +115,7 @@ public class Main {
         } while(true);
     }
 
-    private static void incluir(String nome, String dataNascimento, String telefone, double nota) {
+    public static void incluir(String nome, String dataNascimento, String telefone, double nota) {
         Date dataCriacaoCadastro = new Date();
         Date dataAlteracaoCadastro = new Date();
 
@@ -128,7 +128,7 @@ public class Main {
         }
     }
 
-    private static void alterar(String nome) {
+    public static void alterar(String nome) {
         Scanner entrada = new Scanner(System.in);
 
         for (Pessoa p: lista) {
@@ -193,7 +193,7 @@ public class Main {
         }
 
     }
-    private static void excluir(String nome) {
+    public static void excluir(String nome) {
 
         if (lista.removeIf(pessoa -> pessoa.getNome().equals(nome))) {
             System.out.println("Cadastro excluído.");
@@ -203,7 +203,7 @@ public class Main {
 
     }
 
-    private static void mostrarTodos() {
+    public static void mostrarTodos() {
         for (Pessoa pessoa : lista) {
             System.out.println("Dados do cadastro: " + pessoa.toString());
         }
