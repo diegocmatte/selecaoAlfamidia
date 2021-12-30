@@ -7,12 +7,15 @@ public class Main {
     private static ArrayList<Pessoa> lista = new ArrayList<>();
 
     public static void menu(){
-        System.out.println("\tMenu principal");
-        System.out.println("0. Fim");
-        System.out.println("1. Incluir Aluno/Pessoa");
-        System.out.println("2. Alterar Aluno/Pessoa");
-        System.out.println("3. Excluir Aluno/Pessoa");
-        System.out.println("4. Consultar todos Aluno/Pessoa");
+        System.out.println("|-------------------------------|");
+        System.out.println("|         Menu principal        |");
+        System.out.println("|-------------------------------|");
+        System.out.println("| Opção 1. Incluir Aluno/Pessoa |");
+        System.out.println("| Opção 2. Alterar Aluno/Pessoa |");
+        System.out.println("| Opção 3. Excluir Aluno/Pessoa |");
+        System.out.println("| Opção 4. Consultar Todos      |");
+        System.out.println("| Opção 0. Encerrar Sistema     |");
+        System.out.println("|-------------------------------|");
         System.out.print("Digite a opção desejada: ");
     }
 
@@ -31,8 +34,8 @@ public class Main {
 
                     System.out.print("Digite o nome: ");
                     String nome = entradaIncluir.nextLine();
-                    while(nome.equals("")){
-                        System.out.println("Nome não pode ser vazio.");
+                    while(nome.length() < 3){
+                        System.out.println("Nome deve possuir ao menos 3 caracteres.");
                         System.out.print("Digite o nome: ");
                         nome = entradaIncluir.nextLine();
                     }
@@ -206,16 +209,21 @@ public class Main {
     }
 
     public static void mostrarTodos() {
+        System.out.println("---------------------");
+        System.out.println("Inicio dos registros.");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for (Pessoa pessoa : lista) {
             System.out.println("Dados do cadastro: " + pessoa.toString());
         }
+        System.out.println("Fim dos registros.");
+        System.out.println("------------------");
     }
 
     private static void mostrarNomeId(){
         System.out.println("Nome e ID das Pessoas/Alunos registrados.");
         for (Pessoa value : lista) {
             System.out.println("{ Nome: " + value.getNome() +
-                    ", ID: " + value.getIdPessoa() + "}");
+                               ", ID: " + value.getIdPessoa() + "}");
         }
     }
 

@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Aluno extends Pessoa{
 
@@ -22,11 +24,11 @@ public class Aluno extends Pessoa{
         return "Aluno{" +
                 " ID = " + super.getIdPessoa() +
                 ", Nome = " + super.getNome() +
-                ", telefone = " + super.getTelefone() +
-                ", data de nascimento = " + super.getDataNascimento() +
-                ", data de cadastro = " + super.getDataCadastro() +
-                ", última alteração no cadastro = " + super.getUltimaAlteracao() +
-                ", nota final = " + notaFinal +
+                ", Telefone = " + super.formatarString(getTelefone(), "(##) #####-####") +
+                ", Data de nascimento = " + super.formatarString(getDataNascimento(), "##/##/####") +
+                ", Data de cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(super.getDataCadastro()) +
+                ", Última alteração no cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(super.getUltimaAlteracao()) +
+                ", Nota final = " + notaFinal +
                 " }";
 
     }

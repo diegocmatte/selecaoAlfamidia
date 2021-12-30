@@ -71,14 +71,14 @@ public class Pessoa {
         return "Pessoa{" +
                 " ID = " + idPessoa +
                 ", Nome = " + nome +
-                ", Telefone = " + formatarString(telefone, "(##) ####-####") +
+                ", Telefone = " + formatarString(telefone, "(##) #####-####") +
                 ", Data de nascimento = " + formatarString(dataNascimento, "##/##/####")  +
                 ", Data de cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataCadastro) +
                 ", Última alteração no cadastro = " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(ultimaAlteracao) +
                 " }";
     }
 
-    private String formatarString(String value, String pattern) {
+    protected String formatarString(String value, String pattern) {
         MaskFormatter mf;
         try {
             mf = new MaskFormatter(pattern);
