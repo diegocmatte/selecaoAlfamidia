@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -48,8 +47,6 @@ public class Main {
                     while (!validarData(dataNascimento)) {
                         System.out.print("Digite a data de nascimento (DDMMAAAA): ");
                         dataNascimento = entradaIncluir.nextLine();
-
-
                     }
 
                     System.out.print("Digite o telefone (somente números e com ddd): ");
@@ -149,7 +146,6 @@ public class Main {
                 String nomeAtual = p.getNome();
                 String telefoneAtual = p.getTelefone();
                 String nascimentoAtual = p.getDataNascimento();
-
                 Date novaDataAlteracaoCadastro = new Date();
 
                 System.out.print("Digite o novo nome (deixe em branco para não alterar): ");
@@ -165,7 +161,7 @@ public class Main {
                 System.out.print("Digite a nova data de nascimento (DDMMAAAA) (deixe em branco para não alterar): ");
                 String novaDataNascimento = entrada.nextLine();
                 if (novaDataNascimento.length() == 8) {
-                    if(validarData(novaDataNascimento)) {
+                    if (validarData(novaDataNascimento)) {
                         p.setDataNascimento(novaDataNascimento);
                         System.out.println("Data de nascimento alterada com sucesso.");
                     } else {
@@ -260,7 +256,7 @@ public class Main {
         }
 
         if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
-            if (dia > 31){
+            if (dia > 31) {
                 System.out.println("Data inválida para mês de 31 dias.");
                 return false;
             }
@@ -276,7 +272,7 @@ public class Main {
                     return false;
                 }
             }
-            if(dia > 30){
+            if (dia > 30) {
                 System.out.println("Data inválida para mês de 30 dias.");
                 return false;
             }
